@@ -51,7 +51,7 @@ def insert():
         return redirect(url_for('Index'))
 
 
-# this is our update route where we are going to update our employee
+# this is our update route where we are going to update book details
 @app.route('/update', methods=['GET', 'POST'])
 def update():
     if request.method == 'POST':
@@ -72,7 +72,7 @@ def update():
         return redirect(url_for('Index'))
 
 
-# This route is for deleting our employee
+# This route is for deleting book details
 @app.route('/delete/<id>/', methods=['GET', 'POST'])
 def delete(id):
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
