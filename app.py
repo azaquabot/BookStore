@@ -46,7 +46,7 @@ def insert():
                     (btitle, bdesc, bprice, author, genre))
         conn.commit()
 
-        flash("Employee Inserted Successfully")
+        flash("Book details inserted Successfully")
 
         return redirect(url_for('Index'))
 
