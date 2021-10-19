@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  db:
+     image: postgres:13-alpine
+     environment:
+        - DB_USER=postgres
+        - DB_PASS=admin
+        - DB_NAME=demodb
+  web:
+    image: bookstore
+    build: .
+    depends_on:
+       - db
+    ports:
+      - "8000:8000"
