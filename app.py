@@ -5,7 +5,7 @@ import psycopg2.extras
 app = Flask(__name__)
 app.secret_key = "Secret Key"
 
-DB_HOST = "localhost"
+DB_HOST = "44.142.109.4"
 DB_NAME = "mydb"
 DB_USER = "postgres"
 DB_PASS = "admin"
