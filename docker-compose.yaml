@@ -6,8 +6,9 @@ services:
         - DB_USER=postgres
         - DB_PASS=admin
         - DB_NAME=demodb
+        - POSTGRES_PASSWORD=admin
   web:
-    image: bookstore
+    image: booksore
     build: .
     depends_on:
        - db
