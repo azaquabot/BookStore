@@ -1,12 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-import psycopg2  # pip install psycopg2
+import psycopg2
 import psycopg2.extras
 
 app = Flask(__name__)
 app.secret_key = "Secret Key"
 
-DB_HOST = "44.142.109.4"
-DB_NAME = "mydb"
+DB_HOST = "bookdb"
+DB_NAME = "demodb"
 DB_USER = "postgres"
 DB_PASS = "admin"
 
@@ -29,7 +29,6 @@ def Index():
     g = "SELECT * FROM genre"
     cur.execute(g)  # Execute the SQL
     list_genres = cur.fetchall()
-    print(list_books)
     return render_template('index.html', list_books=list_books, list_authors=list_authors, list_genres=list_genres)
 
 
@@ -46,12 +45,37 @@ def insert():
                     (btitle, bdesc, bprice, author, genre))
         conn.commit()
 
-        flash("Book details inserted Successfully")
+        flash("Book details Inserted Successfully")
+        return redirect(url_for('Index'))
+
+
+@app.route('/addauthor', methods=['POST'])
+def addauthor():
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    if request.method == 'POST':
+        aname = request.form['aname']
+        cur.execute("INSERT INTO author (author_name) VALUES (%s)", (aname,))
+        conn.commit()
+
+        flash("Author details Inserted Successfully")
 
         return redirect(url_for('Index'))
 
 
-# this is our update route where we are going to update book details
+@app.route('/addgenre', methods=['POST'])
+def addgenre():
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    if request.method == 'POST':
+        gtype = request.form['gtype']
+        cur.execute("INSERT INTO genre (genre_type) VALUES (%s)", (gtype,))
+        conn.commit()
+
+        flash("Genre details Inserted Successfully")
+
+        return redirect(url_for('Index'))
+
+
+# this is our update route where we are going to update our employee
 @app.route('/update', methods=['GET', 'POST'])
 def update():
     if request.method == 'POST':
@@ -72,7 +96,7 @@ def update():
         return redirect(url_for('Index'))
 
 
-# This route is for deleting book details
+# This route is for deleting our employee
 @app.route('/delete/<id>/', methods=['GET', 'POST'])
 def delete(id):
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -86,3 +110,4 @@ def delete(id):
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000, host='0.0.0.0')
+
