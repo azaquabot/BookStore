@@ -7,8 +7,14 @@
     <div class="row">
         <div class="col md-12">
 			<div class="jumbotron p-3">
-				<h2>Manage <b>Book</b>  <button type="button"  class="btn btn-success float-right"
-                                data-toggle="modal" data-target="#mymodal">Add New Book</button> </h2>
+				  <h2>Manage <b>Book</b>
+					  <button type="button"  class="btn btn-success float-right"
+                data-toggle="modal" data-target="#mymodal" style="margin:5px">Add New Book</button>
+				  <button type="button"  class="btn btn-success float-right"
+                data-toggle="modal" data-target="#authormodal" style="margin:5px">Add New Author</button>
+				   <button type="button"  class="btn btn-success float-right"
+                data-toggle="modal" data-target="#genremodal" style="margin:5px">Add New Genre</button></h2>
+
 				{% with messages = get_flashed_messages() %}
 				{% if messages %}
 				{% for message in messages %}
@@ -150,6 +156,62 @@
 
 				 <div class="form-group">
 					 <button class="btn btn-primary" type="submit">Add Book</button>
+				 </div>
+			 </form>
+		 </div>
+		  <div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  </div>
+	  </div>
+   </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Add Author-->
+			<div id="authormodal" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+			 <h4 class="modal-title">Add Author</h4>
+         </div>
+         <div class="modal-body">
+			 <form action="{{url_for('addauthor')}}" method="POST">
+                 <div class="form-group">
+					 <label>Author:</label>
+                  <input type="text" class="form-control" name="aname" required="1">
+				 </div>
+				 <div class="form-group">
+					 <button class="btn btn-primary" type="submit">Add Author</button>
+				 </div>
+			 </form>
+		 </div>
+		  <div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  </div>
+	  </div>
+   </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Add Genre-->
+			<div id="genremodal" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+			 <h4 class="modal-title">Add Genre</h4>
+         </div>
+         <div class="modal-body">
+			 <form action="{{url_for('addgenre')}}" method="POST">
+                 <div class="form-group">
+					 <label>Author:</label>
+                  <input type="text" class="form-control" name="gtype" required="1">
+				 </div>
+				 <div class="form-group">
+					 <button class="btn btn-primary" type="submit">Add Genre</button>
 				 </div>
 			 </form>
 		 </div>
